@@ -10,7 +10,7 @@ export function Header() {
         <Logo />
       </Link>
       <div className="flex mx-auto gap-8">
-        <Link href="/">Калькулятор</Link>
+        <Link href="/calculator">Калькулятор</Link>
         <Link href="/">Тарифы</Link>
         <Link href="/">Пункты выдачи</Link>
         <Link href="/">О проекте</Link>
