@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import React, { InputHTMLAttributes } from "react";
+import clsx from "clsx";
 
 export function Input({
   children,

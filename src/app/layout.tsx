@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
-import "./globals.css";
-import { Header } from "@/widgets/header";
+
 import { Footer } from "@/widgets/footer";
+import { Header } from "@/widgets/header";
+
+import "./globals.css";
 
 const raleway = Raleway({
   variable: "--font-raleway",

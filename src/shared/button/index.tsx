@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import React, { ButtonHTMLAttributes } from "react";
+import clsx from "clsx";
 
 export function Button({
   children,
