@@ -5,6 +5,10 @@
   --foreground: #171717;
 }
 
+.lucide * {
+  vector-effect: non-scaling-stroke;
+}
+
 @theme inline {
   --text-heading: var(--text-2xl);
   --color-background: var(--background);
