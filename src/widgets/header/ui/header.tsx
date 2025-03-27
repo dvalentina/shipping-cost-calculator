@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { Logo } from "@/shared/logo";
+import { Logo } from "@/shared/ui/logo";
 
 export function Header() {
   return (
