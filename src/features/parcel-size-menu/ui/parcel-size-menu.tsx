@@ -81,8 +81,20 @@ export function ParcelSizeMenu() {
     (selection as Set<Key>)?.has(item.id)
   );
 
+  // This is a fix for React Aria overlay bug with scrollbar and html padding in Menu Popover
+  const handleOpenChange = (isOpen: boolean) => {
+    const header = document.getElementById("header");
+    if (header) {
+      if (isOpen) {
+        header.style.paddingRight = "15px";
+      } else {
+        header.style.paddingRight = "0";
+      }
+    }
+  };
+
   return (
-    <MenuTrigger>
+    <MenuTrigger onOpenChange={handleOpenChange}>
       <div className="group w-full min-w-0 h-14">
         <Button className="relative group h-full w-full bg-stone-100 rounded-md px-4 pt-5 focus:outline-2 data-pressed:outline-2 focus:outline-amber-500 data-pressed:outline-amber-500 focus:bg-white  data-pressed:bg-white hover:bg-orange-50 overflow-hidden">
           <Label
@@ -116,7 +128,7 @@ export function ParcelSizeMenu() {
                 <MenuItem
                   className={({ isFocused, isSelected }) =>
                     clsx(
-                      "px-4 py-3 rounded-sm transition-background-color duration-100 flex gap-4",
+                      "px-4 py-3 rounded-sm transition-background-color duration-100 flex gap-4 cursor-pointer",
                       isFocused && "bg-orange-100",
                       isSelected && "bg-orange-50 font-semibold"
                     )

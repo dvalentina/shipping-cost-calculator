@@ -25,10 +25,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${raleway.variable} antialiased `}>
         <Header />
-        <div className="fixed w-full top-0 bottom-0 overflow-x-auto">
-          <div className="grid grid-cols-16 gap-4 h-full">{children}</div>
-          <Footer />
-        </div>
+        <div className="grid grid-cols-16 gap-4 h-full">{children}</div>
+        <Footer />
       </body>
     </html>
   );
