@@ -15,6 +15,7 @@ import {
   Selection,
   Text,
 } from "react-aria-components";
+import { Control, FieldValues, Path, useController } from "react-hook-form";
 
 import { ISize } from "@/entities/parcel/model";
 
@@ -69,12 +70,24 @@ const parcelSizes: ISize[] = [
 const sizeToTextValue = (size: ISize) =>
   `${size.name}, ${size.width}x${size.length}x${size.height} см, до ${size.weight} кг`;
 
-export function ParcelSizeMenu() {
+interface IParcelSizeMenu<T extends FieldValues> {
+  name: Path<T>;
+  control: Control<T>;
+}
+
+export function ParcelSizeMenu<T extends FieldValues>({
+  name,
+  control,
+}: IParcelSizeMenu<T>) {
   const [selection, setSelection] = useState<Selection>();
+  const {
+    field: { onChange },
+    fieldState: { error, invalid },
+  } = useController({ name, control });
 
   const handleSelectionChange = (selection: Selection) => {
     setSelection(selection);
-    console.log(selection);
+    onChange([...selection][0]);
   };
 
   const chosen = parcelSizes.find((item) =>
@@ -105,7 +118,12 @@ export function ParcelSizeMenu() {
           >
             Размер посылки
           </Label>
-          <Input className="hidden" />
+          <Input
+            className="hidden"
+            name={name}
+            value={chosen ? sizeToTextValue(chosen) : ""}
+            readOnly
+          />
           {chosen ? (
             <p className="w-full truncate block text-left">
               {sizeToTextValue(chosen)}
@@ -116,6 +134,11 @@ export function ParcelSizeMenu() {
             </p>
           )}
         </Button>
+        {invalid && (
+          <Text slot="errorMessage" className="text-sm text-error">
+            {error?.message}
+          </Text>
+        )}
         <Popover className="bg-white rounded-md shadow-md overflow-hidden w-(--trigger-width) p-1 ">
           <Menu
             selectionMode="single"

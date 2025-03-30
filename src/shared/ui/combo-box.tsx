@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import {
   ComboBox as ComboBoxPrimitive,
   ComboBoxProps,
+  FieldError,
   Input,
   Label,
   ListBox,
@@ -12,12 +13,15 @@ import {
   ListBoxItemProps,
   Popover,
 } from "react-aria-components";
+import { Message } from "react-hook-form";
 
-interface IComboBox<T extends object>
+export interface IComboBox<T extends object>
   extends Omit<ComboBoxProps<T>, "children"> {
-  label: string;
-  placeholder: string;
-  children: React.ReactNode | ((item: T) => React.ReactNode);
+  label?: string;
+  placeholder?: string;
+  children?: React.ReactNode | ((item: T) => React.ReactNode);
+  ref?: React.Ref<HTMLInputElement>;
+  errorMessage?: Message;
 }
 
 function ComboBox<T extends object>({
@@ -25,6 +29,8 @@ function ComboBox<T extends object>({
   placeholder,
   children,
   onInputChange,
+  ref,
+  errorMessage,
   ...props
 }: IComboBox<T>) {
   const [active, setActive] = useState(false);
@@ -33,6 +39,10 @@ function ComboBox<T extends object>({
     setActive(!!value);
     if (onInputChange) onInputChange(value);
   };
+
+  useEffect(() => {
+    console.log(errorMessage);
+  }, [errorMessage]);
 
   return (
     <ComboBoxPrimitive
@@ -52,7 +62,9 @@ function ComboBox<T extends object>({
         <Input
           className="size-full bg-stone-100 rounded-md px-4 pt-5 focus:outline-2 focus:outline-amber-500 focus:bg-white hover:bg-orange-50 focus:placeholder:text-stone-400 placeholder:text-transparent placeholder:transition-color placeholder:duration-100"
           placeholder={placeholder}
+          ref={ref}
         />
+        <FieldError className="text-error text-sm">{errorMessage}</FieldError>
       </div>
       <Popover className="bg-white rounded-md shadow-md overflow-hidden w-(--trigger-width) p-1">
         <ListBox>{children}</ListBox>
