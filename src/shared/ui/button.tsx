@@ -10,7 +10,7 @@ export function Button({
     <button
       {...props}
       className={clsx(
-        "flex items-center justify-center bg-accent px-10 h-12 rounded-md text-white font-semibold cursor-pointer",
+        "flex items-center justify-center bg-accent px-10 h-14 rounded-md text-white font-semibold text-lg cursor-pointer hover:bg-amber-500 focus:outline-2 focus:outline-amber-700 transition-color duration-100 hover:shadow-lg active:shadow-md active:bg-accent",
         className
       )}
     >
@@ -18,3 +18,5 @@ export function Button({
     </button>
   );
 }
+
+//
