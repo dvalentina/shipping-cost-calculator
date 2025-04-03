@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Form } from "react-aria-components";
 import { useForm } from "react-hook-form";
 
@@ -18,9 +19,13 @@ export function HomeCalculateCard() {
     defaultValues: { from: "", to: "", size: "" },
     resolver: zodResolver(homeCalulateCardSchema),
   });
+  const router = useRouter();
 
   const onSubmit = (data: THomeCalculateCardSchema) => {
     console.log(data);
+    router.push(
+      `/calculator?from=${data.from}&to=${data.to}&size=${data.size}`
+    );
   };
 
   return (

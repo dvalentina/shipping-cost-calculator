@@ -1,7 +1,15 @@
 import React from "react";
 import clsx from "clsx";
 
-export function ShippingDetailsCard({ className }: { className?: string }) {
+import { THomeCalculateCardSchema } from "@/entities/home-calculate-card/model";
+
+export function ShippingDetailsCard({
+  className,
+  initial: { from, to, size },
+}: {
+  className?: string;
+  initial: THomeCalculateCardSchema;
+}) {
   return (
     <div
       className={clsx(
@@ -10,6 +18,9 @@ export function ShippingDetailsCard({ className }: { className?: string }) {
       )}
     >
       <p>Детали</p>
+      <p>{from}</p>
+      <p>{to}</p>
+      <p>{size}</p>
     </div>
   );
 }
